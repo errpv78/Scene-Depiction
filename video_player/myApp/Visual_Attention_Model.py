@@ -140,7 +140,7 @@ class RNN_Decoder(tf.keras.Model):
 
 
 # Loading tokenizer
-with open('tokenizer.pickle', 'rb') as handle:
+with open('myApp/tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
 
@@ -163,7 +163,7 @@ def loss_function(real, pred):
   return tf.reduce_mean(loss_)
 
 
-checkpoint_path = "../../../checkpoints/train"
+checkpoint_path = "../../checkpoints/train"
 ckpt = tf.train.Checkpoint(encoder=encoder,
                            decoder=decoder,
                            optimizer = optimizer)

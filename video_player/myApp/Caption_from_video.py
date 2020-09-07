@@ -1,7 +1,7 @@
 print("Loading model from disk")
 import cv2
 import imutils
-from Predict_cap import predict_caption
+from .Predict_cap import predict_caption
 from gtts import gTTS
 import vlc
 import pafy
@@ -48,3 +48,4 @@ def start_video(video='city.mp4'):
     cv2.destroyAllWindows()
     cap.release()
 
+# start_video()
