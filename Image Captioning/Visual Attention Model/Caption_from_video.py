@@ -1,18 +1,25 @@
 print("Loading model from disk")
 import cv2
 import imutils
+import tensorflow as tf
+# Checking if GPU available
+physical_devices = tf.config.experimental.list_physical_devices("GPU")
+tf.config.experimental.set_memory_growth(physical_devices[0], True)
+
+
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 from Predict_cap import predict_caption
 from gtts import gTTS
 import vlc
-import pafy
-from ffpyplayer.player import MediaPlayer
+# import pafy
+# from ffpyplayer.player import MediaPlayer
 
 # import gi
 
 
-url = 'https://www.youtube.com/watch?v=NX3bSUlv4Ek'
-vPafy = pafy.new(url)
-play = vPafy.getbest()
+# url = 'https://www.youtube.com/watch?v=NX3bSUlv4Ek'
+# vPafy = pafy.new(url)
+# play = vPafy.getbest()
 
 def start_video(video='city.mp4'):
     cap = cv2.VideoCapture(video)
@@ -48,3 +55,4 @@ def start_video(video='city.mp4'):
     cv2.destroyAllWindows()
     cap.release()
 
+start_video()
