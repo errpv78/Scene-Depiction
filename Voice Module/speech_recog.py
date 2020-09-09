@@ -1,14 +1,22 @@
 import speech_recognition as sr
+import os
+import pyttsx
+
 
 def describe():
     #function to describe scene
-    print("Not yet implemented!")
+    tts_string="Not yet implemented!"
+    print(tts_string)
+    return tts_string
 
 def help_v1():
     #function to help 
-    print("Help is coming soon!")
+    tts_string="Help is coming soon!"
+    print(tts_string)
+    return tts_string
 
 r=sr.Recognizer()
+engine=pyttsx.init()
 
 with sr.Microphone() as source:
     print("Available commands are\ndescribe\nhelp")
@@ -17,12 +25,15 @@ with sr.Microphone() as source:
 
 try:
 
-    tts_str=r.recognize_google(audio)
-    print("You spoke: "+tts_str)
-    if tts_str=="describe":
-        describe()
-    elif tts_str=="help":
-        help_v1()
+    stt_str=r.recognize_google(audio)
+    print("You spoke: "+stt_str)
+    if stt_str=="describe":
+        engine.say(describe())
+        engine.runAndWait()
+    elif stt_str=="help":
+        engine.say(help_v1())
+        engine.runAndWait()
+    
 
 except LookupError:
     print("Network Error! Please try again later.")
