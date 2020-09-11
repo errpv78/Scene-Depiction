@@ -4,10 +4,16 @@ import cv2
 import time
 from django.views.decorators import gzip
 import os
+from django.views.generic.base import TemplateView
+
 # from .Caption_from_video import start_video
 # from .models import Video
 # from .forms import VideoForm
 # Create your views here.
+
+
+class video_with_html(TemplateView):
+    template_name = 'video_with_html.html'
 
 
 def home(request):

@@ -14,7 +14,7 @@ url = 'https://www.youtube.com/watch?v=NX3bSUlv4Ek'
 vPafy = pafy.new(url)
 play = vPafy.getbest()
 
-def start_video(video='city.mp4'):
+def start_video(video='videos/city.mp4'):
     cap = cv2.VideoCapture(video)
     sound = MediaPlayer(play.url)
     # cap = cv2.VideoCapture(0)
@@ -48,4 +48,5 @@ def start_video(video='city.mp4'):
     cv2.destroyAllWindows()
     cap.release()
 
-start_video(play.url)
+# start_video(play.url)
+start_video()
