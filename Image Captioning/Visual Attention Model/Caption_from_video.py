@@ -2,12 +2,14 @@ print("Loading model from disk")
 import cv2
 import imutils
 import tensorflow as tf
+import pathlib
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 from Predict_cap import predict_caption
 from gtts import gTTS
 import vlc
 import pafy
 from ffpyplayer.player import MediaPlayer
+from time import sleep
 
 
 url = 'https://www.youtube.com/watch?v=NX3bSUlv4Ek'
@@ -33,6 +35,7 @@ def start_video(video='videos/city.mp4'):
             if key == ord("c"):
                 caption = predict_caption(frame)
                 print(caption)
+                # sleep(5)
                 file = gTTS(text=caption, lang='en')
                 file.save('hello.mp3')
                 p = vlc.MediaPlayer('hello.mp3')
@@ -48,5 +51,5 @@ def start_video(video='videos/city.mp4'):
     cv2.destroyAllWindows()
     cap.release()
 
-# start_video(play.url)
-start_video()
+start_video(play.url)
+# start_video()

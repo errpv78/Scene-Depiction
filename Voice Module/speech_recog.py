@@ -1,6 +1,6 @@
 import speech_recognition as sr
 import os
-import pyttsx
+import pyttsx3
 
 
 def describe():
@@ -16,7 +16,7 @@ def help_v1():
     return tts_string
 
 r=sr.Recognizer()
-engine=pyttsx.init()
+engine=pyttsx3.init()
 
 with sr.Microphone() as source:
     print("Available commands are\ndescribe\nhelp")

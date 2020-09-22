@@ -10,6 +10,7 @@ import json
 from glob import glob
 from PIL import Image
 import pickle
+import pathlib
 
 
 # Suppressing unnecessary tensorflow CPU warnings
@@ -140,7 +141,10 @@ class RNN_Decoder(tf.keras.Model):
 
 
 # Loading tokenizer
-with open('tokenizer.pickle', 'rb') as handle:
+dirpath = os.path.dirname(os.path.abspath(__file__))
+filename = '/tokenizer.pickle'
+
+with open(dirpath+filename, 'rb') as handle:
     tokenizer = pickle.load(handle)
 
 
@@ -163,6 +167,8 @@ def loss_function(real, pred):
   return tf.reduce_mean(loss_)
 
 
+dirpath = os.path.dirname(os.path.abspath(__file__))
+
 checkpoint_path = "../../../checkpoints/train"
 ckpt = tf.train.Checkpoint(encoder=encoder,
                            decoder=decoder,
@@ -176,6 +182,8 @@ if ckpt_manager.latest_checkpoint:
 
 
 def evaluate(image):
+
+
     attention_plot = np.zeros((max_length, attention_features_shape))
 
     hidden = decoder.reset_state(batch_size=1)

@@ -10,10 +10,13 @@ import json
 from glob import glob
 from PIL import Image
 import pickle
+import pathlib
+
 
 
 # Suppressing unnecessary tensorflow CPU warnings
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+print(os.getcwd())
 
 
 # Loading image from path
@@ -140,6 +143,7 @@ class RNN_Decoder(tf.keras.Model):
 
 
 # Loading tokenizer
+print(pathlib.Path().absolute())
 with open('myApp/tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
@@ -176,6 +180,8 @@ if ckpt_manager.latest_checkpoint:
 
 
 def evaluate(image):
+    print(pathlib.Path().absolute())
+
     attention_plot = np.zeros((max_length, attention_features_shape))
 
     hidden = decoder.reset_state(batch_size=1)
