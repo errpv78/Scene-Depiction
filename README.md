@@ -1,6 +1,13 @@
 # Scene-Depiction
 Scene Depiction in Videos for blind by Image Captioning
 
+## Pre-evaluation instructions
+All the documents and diagrams are located in documentation folder.<br>
+Code completion update:<br>
+1. The image captioning model is completed, full training on dataset is left.<br>
+2. Web app is in development stage.<br>
+3. Voice commands are in exploratory stage.<br>
+
 ## Developer Instructions
 1. If virtualenv not installed, then install it either depending on your system or by:<br>
 <code>pip install virtualenv</code><br>
