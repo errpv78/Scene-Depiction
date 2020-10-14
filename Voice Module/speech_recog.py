@@ -1,14 +1,14 @@
 import speech_recognition as sr
-<<<<<<< HEAD
+# <<<<<<< HEAD
 import os
 import pyttsx3
 
-=======
+# =======
 from gtts import gTTS
 from googletrans import Translator
 import os 
 import time
->>>>>>> c05098483bc596599a48604da6b067d344d738ab
+# >>>>>>> c05098483bc596599a48604da6b067d344d738ab
 
 def describe():
     #function to describe scene
@@ -19,10 +19,10 @@ def help_v1():
     return "Help is coming soon!"
 
 r=sr.Recognizer()
-<<<<<<< HEAD
+# <<<<<<< HEAD
 engine=pyttsx3.init()
-=======
->>>>>>> c05098483bc596599a48604da6b067d344d738ab
+# =======
+# >>>>>>> c05098483bc596599a48604da6b067d344d738ab
 
 with sr.Microphone() as source:
     print("Available commands are\ndescribe\nhelp")

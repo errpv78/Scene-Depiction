@@ -169,7 +169,7 @@ def loss_function(real, pred):
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
-checkpoint_path = "../../../checkpoints/train"
+checkpoint_path = dirpath + "/../../../checkpoints/train"
 ckpt = tf.train.Checkpoint(encoder=encoder,
                            decoder=decoder,
                            optimizer = optimizer)

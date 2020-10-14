@@ -35,9 +35,9 @@ def main():
 
         frame = cv2.resize(frame, (720, 480))
         cv2.imshow('Camera', frame)
-        fr+=1
-        if fr<100:
-            sleep(0.0305)
+        # fr+=1
+        # if fr<100:
+        sleep(0.0305)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
