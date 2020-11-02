@@ -7,8 +7,8 @@ import os
 from django.views.generic.base import TemplateView
 
 # from .Caption_from_video import start_video
-# from .models import Video
-# from .forms import VideoForm
+from .models import Video
+from .forms import VideoForm
 # Create your views here.
 
 
@@ -20,7 +20,7 @@ def home(request):
 
     return render(request, 'home.html', {})
 
-def upload_page(request):
+def upload_video(request):
     lastvideo = Video.objects.last()
 
     videofile = lastvideo.videofile
@@ -32,7 +32,7 @@ def upload_page(request):
     context = {'videofile': videofile,
                'form': form
                }
-    return render(request, 'home.html', context)
+    return render(request, 'upload_video.html', context)
 
 
 

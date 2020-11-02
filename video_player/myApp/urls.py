@@ -8,4 +8,5 @@ urlpatterns = [
     path('live_stream/', views.live_stream, name='live_stream'),
     path('play_recorded_video/', views.play_recorded_video, name='play_recorded_video'),
     path('video_with_html/', views.video_with_html.as_view(), name='video_with_html'),
+    path('upload_video/', views.upload_video, name='upload_video'),
 ]

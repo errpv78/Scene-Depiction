@@ -19,15 +19,15 @@ play = vPafy.getbest()
 
 def start_video(video='videos/city.mp4'):
     cap = cv2.VideoCapture(video)
-    # sound = MediaPlayer(play.url)
+    sound = MediaPlayer(play.url)
     # cap = cv2.VideoCapture(0)
     print("Video stream starting....")
     fps = FPS().start()
     frame_no = 0
-    while frame_no<40:
+    while frame_no<100:
 
         ret, frame = cap.read()
-        # audio_frame, val = sound.get_frame()
+        audio_frame, val = sound.get_frame()
 
         if ret:
             cv2.imshow("Press c to get caption", frame)
@@ -39,7 +39,7 @@ def start_video(video='videos/city.mp4'):
             # if frame_no==0:
             #     key=ord('c')
             # If 'q' key is pressed, break from loop
-            if frame_no==40:
+            if frame_no==100:
                 caption = predict_caption(frame)
                 print(caption)
                 caption = caption.replace('<unknown> ','')
@@ -50,16 +50,16 @@ def start_video(video='videos/city.mp4'):
                 file.save('hello.mp3')
                 p = vlc.MediaPlayer('hello.mp3')
                 p.play()
-                sleep(3)
+                sleep(2)
                 frame_no = 0
                 # print(caption)
         else:
             break
         if key == ord("q"):
             break
-        # if val != 'eof' and audio_frame is not None:
-        #     # audio
-        #     img, t = audio_frame
+        if val != 'eof' and audio_frame is not None:
+            # audio
+            img, t = audio_frame
 
     fps.stop()
     print("Elapsed time: {:.2f}".format(fps.elapsed()))
