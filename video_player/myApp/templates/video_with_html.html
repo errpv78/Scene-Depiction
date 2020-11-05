@@ -4,7 +4,14 @@
 <body>
 
 <video width="530" height="440" controls autoplay>
-  <source src="{% static "city.mp4" %}" type="video/mp4"> </source>
+  <source src="{{ MEDIA_URL }}{{ videofile }}" type="video/mp4"> </source>
 </video>
 </body>
 </html>
+
+<!--        <br><br>-->
+<!--        <video width='400' controls>-->
+<!--            <source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>-->
+<!--            Your browser does not support the video tag.-->
+<!--        </video>-->
+<!--        <br><br>-->

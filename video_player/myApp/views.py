@@ -21,19 +21,24 @@ def home(request):
     return render(request, 'home.html', {})
 
 def upload_video(request):
-    lastvideo = Video.objects.last()
+    if request.method=='POST':
+        form = VideoForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            form.save()
+        lastvideo = Video.objects.last()
 
-    videofile = lastvideo.videofile
+        videofile = lastvideo.videofile
 
-    form = VideoForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
+        context = {'videofile': videofile,
+                   'form': form
+                   }
+        return render(request, 'video_with_html.html', context)
 
-    context = {'videofile': videofile,
-               'form': form
-               }
-    return render(request, 'upload_video.html', context)
-
+    else:
+        form = VideoForm()
+        context = {'form': form
+                   }
+        return render(request, 'upload_video.html', context)
 
 
 def live_stream(request):
