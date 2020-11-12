@@ -6,6 +6,7 @@ import cv2
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
 import numpy as np
 import time
+import pafy
 
 
 class Ui_MainWindow(object):
@@ -24,6 +25,9 @@ class Ui_MainWindow(object):
         self.link_input = QtWidgets.QLineEdit(self.centralwidget)
         self.link_input.setGeometry(QtCore.QRect(30, 150, 261, 20))
         self.link_input.setObjectName("link_input")
+        regex=QtCore.QRegExp(r"^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$")
+        validator = QtGui.QRegExpValidator(regex)
+        self.link_input.setValidator(validator)
         self.play_button = QtWidgets.QPushButton(self.centralwidget)
         self.play_button.setGeometry(QtCore.QRect(110, 190, 75, 23))
         self.play_button.setObjectName("play_button")
@@ -44,9 +48,12 @@ class Ui_MainWindow(object):
     def file_select_handler(self):
         filename=QtWidgets.QFileDialog.getOpenFileName()
         self.path=filename[0]
-        print(self.path)
 
     def play_video(self):
+        self.url_present=False
+        if self.link_input.text():
+            self.url_present=True
+            self.url=self.link_input.text()
         self.a=App()
         self.a.show()
 
@@ -58,13 +65,20 @@ class VideoThread(QThread):
         self._run_flag = True
 
     def run(self):
-        cap = cv2.VideoCapture(ui.path)
+        if ui.url_present:
+            vPafy=pafy.new(ui.url)
+            play=vPafy.getbest()
+            cap=cv2.VideoCapture(play.url)
+            ui.url_present=False
+        else:
+            cap = cv2.VideoCapture(ui.path)
         while self._run_flag:
             ret, cv_img = cap.read()
             if ret:
                 self.change_pixmap_signal.emit(cv_img)
                 time.sleep(0.033)
         cap.release()
+
 
     def stop(self):
         """Sets run flag to False and waits for thread to finish"""
