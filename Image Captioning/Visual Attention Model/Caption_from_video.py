@@ -8,7 +8,7 @@ from Predict_cap import predict_caption
 from gtts import gTTS
 import vlc
 import pafy
-from ffpyplayer.player import MediaPlayer
+# from ffpyplayer.player import MediaPlayer
 from time import sleep
 from imutils.video import FPS
 
@@ -19,7 +19,7 @@ play = vPafy.getbest()
 
 def start_video(video='videos/city.mp4'):
     cap = cv2.VideoCapture(video)
-    sound = MediaPlayer(play.url)
+    # sound = MediaPlayer(play.url)
     # cap = cv2.VideoCapture(0)
     print("Video stream starting....")
     fps = FPS().start()
@@ -27,7 +27,7 @@ def start_video(video='videos/city.mp4'):
     while frame_no<100:
 
         ret, frame = cap.read()
-        audio_frame, val = sound.get_frame()
+        # audio_frame, val = sound.get_frame()
 
         if ret:
             cv2.imshow("Press c to get caption", frame)
@@ -57,9 +57,9 @@ def start_video(video='videos/city.mp4'):
             break
         if key == ord("q"):
             break
-        if val != 'eof' and audio_frame is not None:
+        # if val != 'eof' and audio_frame is not None:
             # audio
-            img, t = audio_frame
+            # img, t = audio_frame
 
     fps.stop()
     print("Elapsed time: {:.2f}".format(fps.elapsed()))

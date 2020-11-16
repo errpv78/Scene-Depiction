@@ -9,6 +9,8 @@ from django.views.generic.base import TemplateView
 # from .Caption_from_video import start_video
 from .models import Video
 from .forms import VideoForm
+import pathlib, shutil
+
 # Create your views here.
 
 
@@ -21,6 +23,20 @@ def home(request):
     return render(request, 'home.html', {})
 
 def upload_video(request):
+    folder = pathlib.Path(__file__).parent.absolute()
+    folder = str(folder)
+    folder = folder[:-4] + 'edia/videos'
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+
     if request.method=='POST':
         form = VideoForm(request.POST or None, request.FILES or None)
         if form.is_valid():
