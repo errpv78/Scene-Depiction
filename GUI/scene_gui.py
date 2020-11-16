@@ -29,11 +29,14 @@ class Ui_MainWindow(object):
         validator = QtGui.QRegExpValidator(regex)
         self.link_input.setValidator(validator)
         self.play_button = QtWidgets.QPushButton(self.centralwidget)
-        self.play_button.setGeometry(QtCore.QRect(50, 190, 75, 23))
+        self.play_button.setGeometry(QtCore.QRect(10, 190, 75, 23))
         self.play_button.setObjectName("play_button")
+        self.mode_switch_button = QtWidgets.QPushButton(self.centralwidget)
+        self.mode_switch_button.setGeometry(QtCore.QRect(93, 190, 150, 23))
+        self.mode_switch_button.setObjectName("mode_switch_button")
         self.help_button = QtWidgets.QPushButton(self.centralwidget)
-        self.help_button.setGeometry(QtCore.QRect(184, 190, 75, 23))
-        self.play_button.setObjectName("play_button")
+        self.help_button.setGeometry(QtCore.QRect(250, 190, 60, 23))
+        self.help_button.setObjectName("help_button")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -45,9 +48,11 @@ class Ui_MainWindow(object):
         self.file_select_button.setText(_translate("MainWindow", "Click here to Select Video from your PC"))
         self.text_label_1.setText(_translate("MainWindow", "Or Enter YouTubr video link below"))
         self.play_button.setText(_translate("MainWindow", "Play"))
-        self.help_button.setText(_translate("MainWindow", "Scene Caption Mode"))
+        self.mode_switch_button.setText(_translate("MainWindow", "Scene Caption Mode"))
+        self.help_button.setText(_translate("MainWindow", "Help"))
         self.file_select_button.clicked.connect(self.file_select_handler)
         self.play_button.clicked.connect(self.play_video)
+        self.mode_switch_button.clicked.connect(self.mode_dialog)
         self.help_button.clicked.connect(self.help_dialog)
 
     def file_select_handler(self):
@@ -62,14 +67,24 @@ class Ui_MainWindow(object):
         self.a=App()
         self.a.show()
 
-    def help_dialog(self):
+    def mode_dialog(self):
         dialog=QtWidgets.QDialog()
-        dialog.setWindowTitle("Help Menu")
+        dialog.setWindowTitle("Mode Change Menu")
         self.text_label_2 = QtWidgets.QLabel(dialog)
         self.text_label_2.setGeometry(QtCore.QRect(60, 100, 230, 32))
         self.text_label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.text_label_2.setObjectName("text_label_2")
         self.text_label_2.setText("Video Assistance Model is on!")
+        dialog.exec_()
+    
+    def help_dialog(self):
+        dialog=QtWidgets.QDialog()
+        dialog.setWindowTitle("Help Menu")
+        self.text_label_3 = QtWidgets.QLabel(dialog)
+        self.text_label_3.setGeometry(QtCore.QRect(60, 100, 230, 32))
+        self.text_label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.text_label_3.setObjectName("text_label_3")
+        self.text_label_3.setText("Instruction set goes here.")
         dialog.exec_()
 
 
