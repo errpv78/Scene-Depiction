@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
         self.file_select_button.setGeometry(QtCore.QRect(30, 30, 251, 41))
         self.file_select_button.setObjectName("file_select_button")
         self.text_label_1 = QtWidgets.QLabel(self.centralwidget)
-        self.text_label_1.setGeometry(QtCore.QRect(60, 100, 201, 31))
+        self.text_label_1.setGeometry(QtCore.QRect(60, 100, 230, 32))
         self.text_label_1.setAlignment(QtCore.Qt.AlignCenter)
         self.text_label_1.setObjectName("text_label_1")
         self.link_input = QtWidgets.QLineEdit(self.centralwidget)
@@ -29,7 +29,10 @@ class Ui_MainWindow(object):
         validator = QtGui.QRegExpValidator(regex)
         self.link_input.setValidator(validator)
         self.play_button = QtWidgets.QPushButton(self.centralwidget)
-        self.play_button.setGeometry(QtCore.QRect(110, 190, 75, 23))
+        self.play_button.setGeometry(QtCore.QRect(50, 190, 75, 23))
+        self.play_button.setObjectName("play_button")
+        self.help_button = QtWidgets.QPushButton(self.centralwidget)
+        self.help_button.setGeometry(QtCore.QRect(184, 190, 75, 23))
         self.play_button.setObjectName("play_button")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -42,8 +45,10 @@ class Ui_MainWindow(object):
         self.file_select_button.setText(_translate("MainWindow", "Click here to Select Video from your PC"))
         self.text_label_1.setText(_translate("MainWindow", "Or Enter a link below and Click Play!"))
         self.play_button.setText(_translate("MainWindow", "Play!"))
+        self.help_button.setText(_translate("MainWindow", "Help"))
         self.file_select_button.clicked.connect(self.file_select_handler)
         self.play_button.clicked.connect(self.play_video)
+        self.help_button.clicked.connect(self.help_dialog)
 
     def file_select_handler(self):
         filename=QtWidgets.QFileDialog.getOpenFileName()
@@ -56,6 +61,16 @@ class Ui_MainWindow(object):
             self.url=self.link_input.text()
         self.a=App()
         self.a.show()
+
+    def help_dialog(self):
+        dialog=QtWidgets.QDialog()
+        dialog.setWindowTitle("Help Menu")
+        self.text_label_2 = QtWidgets.QLabel(dialog)
+        self.text_label_2.setGeometry(QtCore.QRect(60, 100, 230, 32))
+        self.text_label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.text_label_2.setObjectName("text_label_2")
+        self.text_label_2.setText("Help Details will go here.")
+        dialog.exec_()
 
 class VideoThread(QThread):
     change_pixmap_signal = pyqtSignal(np.ndarray)
@@ -89,8 +104,8 @@ class VideoThread(QThread):
 class App(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("QT CV")
-        self.disply_width = 840
+        self.setWindowTitle("Media Player")
+        self.disply_width = 640
         self.display_height = 480
         # create the label that holds the image
         self.image_label = QLabel(self)
@@ -130,6 +145,7 @@ class App(QWidget):
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
         p = convert_to_Qt_format.scaled(self.disply_width, self.display_height, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
+
 
 
 if __name__ == "__main__":
