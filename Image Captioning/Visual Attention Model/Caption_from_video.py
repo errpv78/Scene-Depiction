@@ -8,7 +8,6 @@ from Predict_cap import predict_caption
 from gtts import gTTS
 import vlc
 import pafy
-# from ffpyplayer.player import MediaPlayer
 from time import sleep
 from imutils.video import FPS
 
