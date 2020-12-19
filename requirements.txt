@@ -197,7 +197,7 @@ pep8==1.7.1
 pexpect==4.8.0
 phonemizer==2.2.1
 pickleshare==0.7.5
-Pillow==7.0.0
+Pillow==7.1.0
 pipe==1.5.0
 pkginfo==1.5.0.1
 playsound==1.2.2
